@@ -3,6 +3,9 @@ const app = express();
 const path = require("path");
 require('dotenv').config();
 
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
 const connectDB = require('./lib/db.js');
 const initDB = require("./init");
 connectDB().then(initDB);
