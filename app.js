@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 require('dotenv').config();
+const ejsMate = require("ejs-mate")
 
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
@@ -12,9 +13,14 @@ connectDB().then(initDB);
 
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended: true}))
+app.use((req, res, next) => {
+  res.locals.currUser = req.user || null; 
+  next();
+});
 
 app.set("views engine","ejs");
 app.set("views",path.join(__dirname,"views"));
+app.engine("ejs",ejsMate);
 
 const indexRoutes = require("./routes/authroute.js");
 app.use("/",indexRoutes);

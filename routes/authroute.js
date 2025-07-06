@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Listing = require("../models/listing");
+//home route
+router.get("/",(req,res)=>{
+  res.send("I am root");
+})
 //show all listings
 router.get("/listings", async (req, res) => {
   const allListing = await Listing.find({});

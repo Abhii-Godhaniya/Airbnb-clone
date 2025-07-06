@@ -1,25 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<% layout("/layouts/boilerplate.ejs") -%>
 <body>
-    <h3>Listing Details:</h3>
-    <ul>
-        <li><%= listing.title %></li>
-        <li><%= listing.description %></li>
-        <li>&#8360; <%= listing.price.toLocaleString("en-In") %></li>
-        <li><%= listing.location %></li>
-        <li><%= listing.country %></li>
-    </ul>
-    <br>
-    <a href="/listings/<%= listing._id %>/edit">Edit your Listing</a>
-    <br><br>
-    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this listing?');">
-    <button type="submit" >Delete Listing</button>
-</form>
 
-</body>
-</html>
+    <body>
+        <div class="row mt-4 show-container">
+
+            <div class="col-8 offset-3">
+                <h3>Listing Details:</h3>
+            </div>
+            <div class="card col-6 offset-3">
+                <img src="<%=listing.image.url %>" class="card-img-top show-img" alt="Listing image">
+                <div class="card-body">
+                    <p class="card-text">
+                        <b><%= listing.title %></b><br>
+                        <%= listing.description %> <br>
+                        &#8360; <%= listing.price.toLocaleString("en-In") %> <br>
+                        <%= listing.location %> <br>
+                        <%= listing.country %>
+                    </p>
+                </div>
+            </div>
+            <div class="edit-btns offset-3">
+                <form action="/listings/<%= listing._id %>/edit" method="GET">
+                    <button class="btn btn-dark edit-btn offset-2">Edit</button>
+                </form>
+            
+                <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this listing?');">
+                    <button class="btn btn-dark dlt-btn offset-4">Delete</button>
+                </form>
+            </div>
+        </div>
+    </body>

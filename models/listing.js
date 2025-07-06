@@ -10,7 +10,7 @@ const listingSchema = new mongoose.Schema({
         required : true
     },
    image: {
-      fileName: {
+      filename: {
         type:String
       },
       url: {

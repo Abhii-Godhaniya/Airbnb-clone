@@ -1,0 +1,94 @@
+
+body{
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.container{
+    flex: 1;
+}
+:root {
+    --bs-secondary: #97DDE8;
+    --bs-soft-pink: #FFD1E2;
+    --bs-coral-red: #FF5938;
+    --bs-light-aqua: #97DDE8;
+    --bs-deep-teal-black: #082026;
+    --bs-dark-cyan: #004A4A;
+     --bs-dark-cyan: #134d80;
+    
+}
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+.footer-links a{
+    text-decoration: none;
+    color: #222222;
+}
+.footer-links a:hover{
+    text-decoration: underline;
+}
+.footer-links, .footer-social-media,.footer-brands{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer-social-media i{
+    margin-right: 1rem;
+    font-size: 1.25rem;
+}
+.footer-info{
+    height: 8rem;
+    background-color: #ebebeb;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+ /* card */
+ .card{
+    border: none !important;
+    margin-bottom: 2rem ;
+ }
+ .card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+ }
+ .card-body{
+    padding: 0rem !important;
+ }
+ .card-text{
+    font-family: 400 !important;
+ }
+
+ .listing-link{
+    text-decoration: none !important;
+ }
+
+ /* overlay-effect */
+ .card-img-overlay{
+    opacity: 0;
+ }
+ .card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+ }
+
+ /* new.ejs btn  style*/
+
+ /* edit.ejs btn style */
+
+ /* show.ejs styling */
+ .show-img{
+    height: 40vh;
+ }
+.edit-btns{
+    display: flex;
+}
