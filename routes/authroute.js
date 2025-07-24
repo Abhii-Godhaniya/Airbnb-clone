@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Listing = require("../models/listing");
+const isloggedin = require("../middleware/auth")
 
+// router.use(isloggedin);
 //show all listings
 router.get("/listings", async (req, res) => {
   const allListing = await Listing.find({});

@@ -4,6 +4,7 @@ const path = require("path");
 require('dotenv').config();
 const ejsMate = require("ejs-mate")
 
+const localsMiddleware = require("./middleware/locals.js")
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
@@ -11,12 +12,10 @@ const connectDB = require('./lib/db.js');
 const initDB = require("./init");
 connectDB().then(initDB);
 
+app.use(localsMiddleware);
 app.use(express.static(path.join(__dirname,"public")));
-app.use(express.urlencoded({extended: true}))
-app.use((req, res, next) => {
-  res.locals.currUser = req.user || null; 
-  next();
-});
+app.use(express.urlencoded({extended: true}));
+
 
 app.set("views engine","ejs");
 app.set("views",path.join(__dirname,"views"));
