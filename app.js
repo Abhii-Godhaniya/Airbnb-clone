@@ -4,7 +4,9 @@ const path = require("path");
 require('dotenv').config();
 const ejsMate = require("ejs-mate")
 
-const localsMiddleware = require("./middleware/locals.js")
+const localsMiddleware = require("./middleware/locals.js");
+const errorHandler = require("./middleware/errorHandler.js");
+const AppError = require("./utils/AppError.js");
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
 
@@ -23,6 +25,12 @@ app.engine("ejs",ejsMate);
 
 const indexRoutes = require("./routes/authroute.js");
 app.use("/",indexRoutes);
+
+app.all("/*splat", (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+});
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{

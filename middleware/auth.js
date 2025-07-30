@@ -1,7 +1,10 @@
+const AppError = require("../utils/AppError");
+
 const isloggedin = (req, res, nexxt)=>{
     if(!req.user){
-        res.status(401).send("You must be logged in")
+        throw new AppError("Error! You must be logged in to create lsiting.")
+        // return res.redirect()
     }
-    nexxt();
+    next();
 }
 module.exports=isloggedin;

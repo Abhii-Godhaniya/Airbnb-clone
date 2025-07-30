@@ -1,0 +1,27 @@
+<% layout("/layouts/boilerplate") -%>
+
+    <body>
+        <div class="card shadow-lg border-danger" style="max-width: 600px; width: 100% mt-3 cols-3;">
+            <div class="card-header bg-danger text-white text-center">
+                <h2>Error <%= err.statusCode || 500 %>
+                </h2>
+            </div>
+            <div class="card-body text-center">
+
+                <% if (err.statusCode===404) { %>
+                    <p class="lead">Page not found.</p>
+                    <% } else if (err.statusCode===403) { %>
+                        <p class="lead">You do not have permission to access this resource.</p>
+                        <% } else { %>
+                            <p class="lead">
+                                <%= err.message %>
+                            </p>
+                            <% } %>
+
+                                <a href="/" class="btn btn-outline-danger mt-3">⬅ Go Back Home</a>
+            </div>
+            <div class="card-footer text-muted text-center small">
+                Please contact support if the issue persists.
+            </div>
+        </div>
+    </body>
