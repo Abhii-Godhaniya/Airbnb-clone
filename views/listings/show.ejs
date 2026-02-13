@@ -4,13 +4,13 @@
         <div class="row mt-4 show-container">
 
             <div class="col-8 offset-3">
-                <h3>Listing Details:</h3>
+                <h3> <%= listing.title %> </h3>
             </div>
             <div class="card col-6 offset-3">
                 <img src="<%=listing.image.url %>" class="card-img-top show-img" alt="Listing image">
                 <div class="card-body">
                     <p class="card-text">
-                        <b><%= listing.title %></b><br>
+                        
                         <%= listing.description %> <br>
                         &#8360; <%= listing.price.toLocaleString("en-In") %> <br>
                         <%= listing.location %> <br>
@@ -23,10 +23,46 @@
                     <button class="btn btn-dark edit-btn offset-2">Edit</button>
                 </form>
             
-                <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST"
+                <form action="/listings/<%= listing._id %> ?_method=DELETE" method="POST"
                     onsubmit="return confirm('Are you sure you want to delete this listing?');">
                     <button class="btn btn-dark dlt-btn offset-4">Delete</button>
                 </form>
             </div>
         </div>
-    </body>   
+        <div class="col-8 offset-3 mt-3 mb-2">
+            <hr>
+            <h4>Leave a Review</h4>
+            <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+                <div class="mb-2">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input class="form-range" min="0" max="5" type="range" id="range" name="review[rating]" required>
+                    <div class="invalid-feedback">PLease select your rating!</div>
+                </div>
+                <div class="mb-2">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" name="review[comment]" id="comment" cols="30" rows="5" required></textarea>
+                    <div class="invalid-feedback">PLease add your review!</div>
+                </div>
+                <div class="invalid-feedback">PLease add your review!</div>
+                <button class="btn btn-dark">Submit</button>
+            </form>
+            <hr>
+            <h4>All Reviews</h4>
+            <% if(listing.reviews.length == 0) { %>
+            <p>No reviews yet. Be the first to leave one!</p>
+            <% } else { %>
+                <ul>
+                    <% listing.reviews.forEach(review=> { %>
+                        <li>
+                            <strong>Rating:</strong>
+                            <%= review.rating %> / 5 <br>
+                                <strong>Comment:</strong>
+                                <%= review.comment %>
+                        </li>
+                        <hr>
+                        <% }) %>
+                </ul>
+                <% } %>
+        
+        </div>
+        </body>
