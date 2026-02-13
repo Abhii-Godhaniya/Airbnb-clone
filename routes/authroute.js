@@ -5,6 +5,8 @@ const isloggedin = require("../middleware/auth");
 const wrapAsync = require("../utils/wrapAsync");
 const AppError = require("../utils/AppError");
 const validateListing = require("../middleware/validateListing");
+const validateReview = require("../middleware/validateReview");
+const Review = require("../models/review");
 
 //show all listings
 router.get("/listings", wrapAsync(async (req, res) => {
@@ -25,7 +27,7 @@ router.get("/listings/new", wrapAsync(async (req, res) => {
 //show listing by id
 router.get("/listings/:id", wrapAsync(async (req, res) => {
   const { id } = req.params;
-  const listing = await Listing.findById(id);
+  const listing = await Listing.findById(id).populate("reviews");
   if (!listing) {
     return res.status(404).send("Listing not found.");
   }
@@ -83,6 +85,17 @@ router.delete("/listings/:id", wrapAsync( async(req, res) => {
   }
 
   res.redirect("/listings");
+}));
+
+//Post route for reviews
+router.post("/listings/:id/reviews", validateReview , wrapAsync(async(req, res)=>{
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+    const newReview = new Review(req.body.review);
+    listing.reviews.push(newReview);
+    await newReview.save();
+    await listing.save();
+    res.redirect(`/listings/${listing._id}`);
 }));
 
 module.exports = router;
