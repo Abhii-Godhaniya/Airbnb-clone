@@ -1,5 +1,5 @@
 const AppError = require("../utils/AppError");
-const listingJoiSchema = require("../schema/listingJoiSchema");
+const { listingJoiSchema } = require("../validations");
 
 const validateListing = (req, res, next)=>{
     const { error } = listingJoiSchema.validate(req.body,{abortEarly: false});
